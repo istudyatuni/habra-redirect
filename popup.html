@@ -7,9 +7,10 @@
 	}
 	a {
 		text-decoration: none;
-	}
-	a:visited {
 		color: blue;
+	}
+	a:not([title~=Main]):hover {
+		text-decoration: underline;
 	}
 </style>
 <script type="text/javascript">
@@ -22,7 +23,7 @@
 	}
 </script>
 <body>
-	<h3><a href="" onclick="update()">Habra</a> redirector</h3>
-	<a href="" onclick="create()">In new tab</a>
+	<h3><a href="" onclick="update()" title="Main page">Habra</a> redirector</h3>
+	<a href="" onclick="create()">Open habra in new tab</a>
 </body>
 </html>

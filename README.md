@@ -1,4 +1,4 @@
-# Open in Habra
+# Open in [habra.](https://habra.js.org)
 
 Browser extension to redirect
 
