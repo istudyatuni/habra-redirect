@@ -3,7 +3,7 @@
 	"description" : "Extension for open posts from habr.com in habra.js.org",
 	"version": "1.0",
 	"manifest_version": 2,
-	"permissions": ["webRequest", "*://*.habr.com/*", "webRequestBlocking"],
+	"permissions": ["tabs", "webRequest", "*://*.habr.com/*", "webRequestBlocking"],
 	"background": {
 		"scripts": ["background.js"],
 		"persistent": true

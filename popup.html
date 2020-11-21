@@ -3,10 +3,26 @@
 	body {
 		width: 15em;
 		text-align: center;
-		margin-top: 1em;
+		margin: 1em;
+	}
+	a {
+		text-decoration: none;
+	}
+	a:visited {
+		color: blue;
 	}
 </style>
+<script type="text/javascript">
+	let url = 'https://habra.js.org'
+	function update() {
+		chrome.tabs.update({url: url})
+	}
+	function create() {
+		chrome.tabs.create({url: url, active: true})
+	}
+</script>
 <body>
-	<h3>Habra redirector</h3>
+	<h3><a href="" onclick="update()">Habra</a> redirector</h3>
+	<a href="" onclick="create()">In new tab</a>
 </body>
 </html>
