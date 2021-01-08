@@ -5,11 +5,14 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 		// https://habr.com/ru/post/(493192)(/#comments)
 		// https://habra.js.org/post/($1)/
-		let postRegex = /habr\.com\/.+\/([0-9]{1,})(\/?.{1,})/;
+		let postRegex = /\/habr\.com\/.+\/([0-9]{1,})(\/?.{1,})/;
 		let redirectUrl = details.url.replace(postRegex, habra)
 
-		// / or /#comments or /#comment_22501886
-		let maybeComment = details.url.match(postRegex)[2]
+		let maybeComment = ''
+		try {
+			// / or /#comments or /#comment_22501886
+			maybeComment = details.url.match(postRegex)[2]
+		} catch {}
 
 		// /#(comments) and /#(comment_22501886)
 		let commentRegex = /^\/#(comment.+)/;
@@ -21,10 +24,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 			// bc it's not supported on habra
 			redirectUrl += 'comments'
 		}
-
-		try {
-			return {redirectUrl: redirectUrl};
-		} catch {}
+		return {redirectUrl: redirectUrl};
 	},
 	{
 		urls: ["*://*.habr.com/*"],
