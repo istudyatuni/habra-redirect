@@ -3,13 +3,12 @@
 	"description" : "Extension for open posts from habr.com in habra.js.org",
 	"version": "1.0",
 	"manifest_version": 2,
-	"permissions": ["tabs", "webRequest", "*://*.habr.com/*", "webRequestBlocking"],
+	"permissions": ["webRequest", "*://*.habr.com/*", "webRequestBlocking", "storage"],
 	"background": {
 		"scripts": ["background.js"],
 		"persistent": true
 	},
 	"browser_action": {
-		"default_popup": "popup.html",
-		"default_icon": "habra.png"
+		"default_icon": "icons/habra.png"
 	}
 }

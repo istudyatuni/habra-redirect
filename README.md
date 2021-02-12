@@ -17,3 +17,7 @@ After it select folder with extension
 `Add-ons - ⚙ - Debug Add-ons - Load Temporary Add-on`
 
 After it select `manifest.json` from folder
+
+# Open original page
+
+If you want to disable redirect, click on extension icon, it will be disabled. For enable, click again
