@@ -12,7 +12,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 		// https://habr.com/ru/post/(493192)(/#comments)
 		// https://habra.js.org/post/($1)/
-		let postRegex = /\/habr\.com\/.+\/([0-9]{1,})(\/?.{1,})/;
+		let postRegex = /\/habr\.com\/.+\/([0-9]{1,})(\/?.{1,})?/;
 
 		// https://*.habr.com/ru/post
 		let subRegex = /.{0,}\.habr\.com\/.+\/([0-9]{1,})(\/?.{1,})/;
