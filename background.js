@@ -2,42 +2,35 @@
 var active = true;
 let habra = 'habra.js.org/post/$1/'
 
+// regex here: https://regex101.com/r/JZ46fx
+const regex = {
+	// https://habr.com/ru/post/(493192)(/#comments)
+	post: /\/habr\.com\/.+\/([0-9]{1,})(\/?.{1,})?/,
+
+	// https://*.habr.com/ru/post
+	sub_domain: /.{0,}\.habr\.com\/.+\/([0-9]{1,})(\/?.{1,})/,
+
+	// /#(comments) and /#(comment_22501886)
+	comment: /^\/#(comment.+)/,
+}
+
 chrome.webRequest.onBeforeRequest.addListener(
 	function(details) {
-		if (!active) {
-			return
-		}
-
-		// regex here: https://regex101.com/r/JZ46fx
-
-		// https://habr.com/ru/post/(493192)(/#comments)
-		// https://habra.js.org/post/($1)/
-		let postRegex = /\/habr\.com\/.+\/([0-9]{1,})(\/?.{1,})?/;
-
-		// https://*.habr.com/ru/post
-		let subRegex = /.{0,}\.habr\.com\/.+\/([0-9]{1,})(\/?.{1,})/;
-		if (subRegex.test(details.url)) {
+		if (!active || regex.sub_domain.test(details.url)) {
 			return;
 		}
-		let redirectUrl = details.url.replace(postRegex, habra)
 
-		let maybeComment = ''
+		let redirectUrl = details.url.replace(regex.post, habra)
 		try {
-			// / or /#comments or /#comment_22501886
-			maybeComment = details.url.match(postRegex)[2]
+			let maybeComment = details.url.match(regex.post)[2]
+
+			if (regex.comment.test(maybeComment)) {
+				// now not supported on habra, so
+				// redirectUrl += maybeComment.match(regex.comment)[1]
+				redirectUrl += 'comments'
+			}
 		} catch {}
 
-		// /#(comments) and /#(comment_22501886)
-		let commentRegex = /^\/#(comment.+)/;
-
-		if (commentRegex.test(maybeComment)) {
-			// redirectUrl += maybeComment.match(commentRegex)[1]
-
-			// for now replace direct comment links just to 'comments'
-			// bc it's not supported on habra
-			redirectUrl += 'comments'
-			// return;
-		}
 		return {redirectUrl: redirectUrl};
 	},
 	{
