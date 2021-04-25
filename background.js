@@ -12,11 +12,13 @@ const regex = {
 
 	// /#(comments) and /#(comment_22501886)
 	comment: /^\/#(comment.+)/,
+
+	sandbox: /sandbox/,
 }
 
 chrome.webRequest.onBeforeRequest.addListener(
 	function(details) {
-		if (!active || regex.sub_domain.test(details.url)) {
+		if (!active || regex.sub_domain.test(details.url) || regex.sandbox.test(details.url)) {
 			return;
 		}
 
