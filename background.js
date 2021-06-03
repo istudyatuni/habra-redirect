@@ -1,14 +1,14 @@
 // idea for toggle active from https://github.com/cielavenir/ctouch/issues/1
 var active = true;
-let habra = 'habra.js.org/post/$1/'
+let habra = 'habra.vercel.app/post/$2/'
 
 // regex here: https://regex101.com/r/JZ46fx
 const regex = {
 	// https://habr.com/ru/post/(493192)(/#comments)
-	post: /\/habr\.com\/.+\/([0-9]{1,})(\/?.{1,})?/,
+	post: /\/(m?\.?habr\.com|habra\.js\.org)\/.+\/([0-9]{1,})(\/?.{1,})?/,
 
 	// https://*.habr.com/ru/post
-	sub_domain: /.{0,}\.habr\.com\/.+\/([0-9]{1,})(\/?.{1,})/,
+	sub_domain: /[^\m]{0,}\.habr\.com\/.+\/([0-9]{1,})(\/?.{1,})/,
 
 	// /#(comments) and /#(comment_22501886)
 	comment: /^\/#(comment.+)/,
@@ -36,7 +36,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 		return {redirectUrl: redirectUrl};
 	},
 	{
-		urls: ["*://*.habr.com/*"],
+		urls: ["*://*.habr.com/*", "*://*.habra.js.org/*"],
 		types: ["main_frame", "sub_frame"]//, "stylesheet", "script", "image", "object", "xmlhttprequest", "other"]
 	},
 	["blocking"]

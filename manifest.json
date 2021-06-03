@@ -1,9 +1,9 @@
 {
 	"name": "Open in Habra.",
-	"description" : "Extension for open posts from habr.com in habra.js.org",
+	"description" : "Extension for open posts from habr.com in habra.vercel.app",
 	"version": "1.0",
 	"manifest_version": 2,
-	"permissions": ["webRequest", "*://*.habr.com/*", "webRequestBlocking", "storage"],
+	"permissions": ["webRequest", "*://*.habr.com/*", "*://*.habra.js.org/*", "webRequestBlocking", "storage"],
 	"background": {
 		"scripts": ["background.js"],
 		"persistent": true
