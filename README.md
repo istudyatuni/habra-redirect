@@ -2,6 +2,8 @@
 
 Browser extension to redirect
 
+*If you have trouble with redirect from habra.js.org to habra.vercel.app, you need to do full page refresh with `ctrl+shift+R` or `ctrl+F5`*
+
 ### How to install
 
 First, download source (`Code - Download ZIP`), and extract it where you want
@@ -18,6 +20,6 @@ After it select folder with extension
 
 After it select `manifest.json` from folder
 
-# Open original page
+### Open original page
 
 If you want to disable redirect, click on extension icon, it will be disabled. For enable, click again
