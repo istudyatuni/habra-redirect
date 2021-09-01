@@ -1,6 +1,6 @@
 // idea for toggle active from https://github.com/cielavenir/ctouch/issues/1
 var active = true;
-let habra = 'habra.vercel.app/post/$2/'
+let habra = '/habra.vercel.app/post/$2/'
 
 // regex here: https://regex101.com/r/JZ46fx
 const regex = {
@@ -9,9 +9,6 @@ const regex = {
 
 	// https://*.habr.com/ru/post
 	sub_domain: /[^\m]{0,}\.habr\.com\/.+\/([0-9]{1,})(\/?.{1,})/,
-
-	// /#(comments) and /#(comment_22501886)
-	comment: /^\/#(comment.+)/,
 
 	sandbox: /sandbox/,
 }
@@ -22,18 +19,14 @@ chrome.webRequest.onBeforeRequest.addListener(
 			return;
 		}
 
-		let redirectUrl = details.url.replace(regex.post, habra)
-		try {
-			let maybeComment = details.url.match(regex.post)[2]
+		let redirect = details.url.replace(regex.post, habra)
 
-			if (regex.comment.test(maybeComment)) {
-				// now not supported on habra, so
-				// redirectUrl += maybeComment.match(regex.comment)[1]
-				redirectUrl += 'comments'
-			}
-		} catch {}
+		let maybeComment = details.url.match(regex.post)
+		if (maybeComment) {
+			redirect += 'comments' + maybeComment[3]
+		}
 
-		return {redirectUrl: redirectUrl};
+		return {redirectUrl: redirect};
 	},
 	{
 		urls: ["*://*.habr.com/*", "*://*.habra.js.org/*"],
