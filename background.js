@@ -10,6 +10,9 @@ const regex = {
 	// https://*.habr.com/ru/post
 	sub_domain: /[^\m]{0,}\.habr\.com\/.+\/([0-9]{1,})(\/?.{1,})/,
 
+	// /#(comments) and /#(comment_22501886)
+	comment: /^\/#(comment.+)/,
+
 	sandbox: /sandbox/,
 }
 
@@ -22,7 +25,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 		let redirect = details.url.replace(regex.post, habra)
 
 		let maybeComment = details.url.match(regex.post)
-		if (maybeComment) {
+		if (regex.comment.test(maybeComment) && maybeComment) {
 			redirect += 'comments' + maybeComment[3]
 		}
 
