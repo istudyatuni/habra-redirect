@@ -1,6 +1,6 @@
 // idea for toggle active from https://github.com/cielavenir/ctouch/issues/1
 var active = true;
-let habra = '/habra.vercel.app/post/$2/'
+let habra = '/geekr.vercel.app/post/$2/'
 
 // regex here: https://regex101.com/r/JZ46fx
 const regex = {
