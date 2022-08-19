@@ -5,7 +5,7 @@ let habra = '/geekr.vercel.app/post/$2/'
 // regex here: https://regex101.com/r/JZ46fx
 const regex = {
 	// https://habr.com/ru/post/(493192)(/#comments)
-	post: /\/(m?\.?habr\.com|habra\.js\.org)\/.+\/([0-9]{1,})(\/?.{1,})?/,
+	post: /\/(m?\.?habr\.com|geekr\.vercel\.app)\/.+\/([0-9]{1,})(\/?.{1,})?/,
 
 	// https://*.habr.com/ru/post
 	sub_domain: /[^\m]{0,}\.habr\.com\/.+\/([0-9]{1,})(\/?.{1,})/,
@@ -32,7 +32,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 		return {redirectUrl: redirect};
 	},
 	{
-		urls: ["*://*.habr.com/*", "*://*.habra.js.org/*"],
+		urls: ["*://*.habr.com/*", "*://*.geekr.vercel.app/*"],
 		types: ["main_frame", "sub_frame"]//, "stylesheet", "script", "image", "object", "xmlhttprequest", "other"]
 	},
 	["blocking"]
